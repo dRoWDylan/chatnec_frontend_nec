@@ -1,0 +1,17 @@
+{
+  "$schema": "./node_modules/ng-packagr/ng-package.schema.json",
+  "lib": {
+    "entryFile": "src/index.ts",
+    "umdModuleIds": {}
+  },
+  "whitelistedNonPeerDependencies": [
+    "@acpaas-ui",
+    "@angular/cdk",
+    "@angular/material",
+    "ngx-typed-js",
+    "@angular/animations",
+    "@angular/forms",
+    "bootstrap-icons",
+    "hammerjs"
+  ]
+}

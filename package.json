@@ -1,0 +1,85 @@
+{
+  "name": "@acpaas-ui-widgets/ngx-chatbot",
+  "description": "Chatbot Smart Widget (Angular)",
+  "author": {
+    "name": "Jasper Van Proeyen",
+    "email": "jasper.vanproeyen@digipolis.be"
+  },
+  "version": "4.0.0",
+  "license": "MIT",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "ng serve --aot",
+    "build": "npm run clean && ng-packagr -p ng-package.json",
+    "clean": "rimraf coverage",
+    "test": "npm run lint && ng test --watch false --code-coverage",
+    "test-watch": "ng test --watch true --code-coverage",
+    "e2e": "ng e2e",
+    "e2e-watch": "watch \"ng e2e -s false\" src e2e --wait=1",
+    "lint": "ng lint",
+    "deploy": "cd dist && aws s3 sync . s3://drow-nec-gpt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/digipolisantwerp/chatbot_widget_angular.git"
+  },
+  "bugs": {
+    "url": "https://github.com/digipolisantwerp/chatbot_widget_angular/issues"
+  },
+  "homepage": "https://github.com/digipolisantwerp/chatbot_widget_angular#readme",
+  "keywords": [
+    "angular",
+    "library",
+    "chatbot",
+    "typescript",
+    "angular-cli",
+    "ng-packagr"
+  ],
+  "dependencies": {
+    "@acpaas-ui/ngx-icon": "^5.0.0",
+    "@angular/animations": "^8.0.0 || ^9.0.0-0",
+    "@angular/cdk": "~8.2.3",
+    "@angular/forms": "^8.0.0 || ^9.0.0-0",
+    "@angular/material": "~8.2.3",
+    "bootstrap-icons": "^1.10.5",
+    "hammerjs": "^2.0.8",
+    "ngx-typed-js": "^1.1.1"
+  },
+  "devDependencies": {
+    "@a-ui/core": "^5.0.1",
+    "@angular-devkit/build-angular": "~0.803.29",
+    "@angular/animations": "~8.2.14",
+    "@angular/cli": "~8.3.29",
+    "@angular/common": "~8.2.14",
+    "@angular/compiler": "~8.2.14",
+    "@angular/compiler-cli": "~8.2.14",
+    "@angular/core": "^8.2.14",
+    "@angular/forms": "~8.2.14",
+    "@angular/language-service": "~8.2.14",
+    "@angular/platform-browser": "~8.2.14",
+    "@angular/platform-browser-dynamic": "~8.2.14",
+    "@angular/router": "~8.2.14",
+    "@types/jasmine": "~2.8.8",
+    "@types/jasminewd2": "~2.0.3",
+    "@types/node": "~8.9.4",
+    "codelyzer": "^5.0.1",
+    "core-js": "^2.5.4",
+    "jasmine-core": "~2.99.1",
+    "jasmine-spec-reporter": "~4.2.1",
+    "karma": "~5.1.0",
+    "karma-chrome-launcher": "~2.2.0",
+    "karma-cli": "~1.0.1",
+    "karma-coverage-istanbul-reporter": "~2.0.1",
+    "karma-jasmine": "~1.1.2",
+    "karma-jasmine-html-reporter": "^0.2.2",
+    "ng-packagr": "^5.4.0",
+    "protractor": "~5.4.0",
+    "rxjs": "~6.6.7",
+    "ts-node": "~7.0.0",
+    "tsickle": "^0.37.0",
+    "tslint": "~5.11.0",
+    "typescript": "~3.5.3",
+    "watch": "^1.0.2",
+    "zone.js": "~0.9.1"
+  }
+}

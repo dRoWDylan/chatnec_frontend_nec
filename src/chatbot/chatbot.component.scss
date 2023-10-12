@@ -1,0 +1,204 @@
+@import '~@a-ui/core/dist/assets/styles/_quarks.scss';
+
+.o-chatbot {
+  &__content {
+    background-color: $white;
+    border: 0 solid $border-color;
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    height: 100%;
+    max-height: 100%;
+//     background: rgb(25,24,37);
+// background: linear-gradient(180deg, rgba(25,24,37,1) 0%, rgba(25,24,41,1) 61%, rgba(36,34,69,1) 83%, rgba(40,36,112,1) 100%);
+  }
+
+  &__buttons {
+    float: right;
+  }
+
+  /**
+   * Elements
+   */
+
+  &__header {
+    background-color: #283236;
+    align-items: center;
+    // border-bottom: 2px solid #ccc;
+    display: flex;
+    justify-content: center;
+    min-height: $spacer * 2;
+    // max-height: 5vh;
+
+    &--no-title {
+      justify-content: flex-end;
+    }
+    &__img{
+      height:5vh;
+    }
+
+    .title1 {
+      font-size:2rem;
+      background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(98,122,132,1) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-family: "Helvetica Neue", sans-serif;
+    }
+
+    .title2 {
+      font-size:2rem;
+      background: linear-gradient(135deg, rgba(18,194,233,1) 0%, rgba(196,113,237,1) 50%, rgba(246,79,89,1) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-family: "Helvetica Neue", sans-serif
+    }
+  }
+
+  &__main {
+    flex: 1;
+    min-height: $spacer * 5;
+    overflow: auto;
+    // background: linear-gradient(to right, #757f9a, #d7dde8);
+    background: linear-gradient(0deg, #eee 0%, #fff 10%, #fff 100%);
+    margin-bottom:4.5rem;
+  }
+
+  &__loader {
+    display: flex;
+
+    span {
+      color: $grey;
+      font-size: 2rem;
+      margin-left: $spacer-xs / 2 * 7;
+    }
+
+    .a-avatar + span {
+      margin-left: $spacer-xs / 2;
+    }
+
+  }
+
+  &__footer {
+    // border-top: 1px solid $border-color;
+    position: fixed;
+    bottom:0;
+    left: 0;
+    width: 100%;
+    background:#fff;
+    padding-left:5%;
+    padding-right:5%;
+    padding-bottom:1rem;
+    padding-top:1rem;
+  }
+
+  &__input {
+    margin: -1px;
+    padding-right: $spacer-lg;
+    position: relative;
+    border-radius:0.7rem;
+    background: #e5e9eb;
+    // border: 1.5px solid white;
+    // border: 1.5px solid #283236;
+
+    input{
+      border-radius: 0.7rem 0 0 0.7rem !important;
+      border-width:0;
+      color: #000;
+      background: #e5e9eb;
+    }
+
+    input:focus {
+      outline-width: 0;
+  }
+
+  ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #283236;
+    opacity: 1; /* Firefox */
+  }
+
+    button {
+      // background-color: rgb(255,255,255,0.4);
+      color: #283236;
+      background: #e5e9eb;
+      position: absolute;
+      right: 0;
+      top: 0;
+      border-radius: 0 0.7rem 0.7rem 0 !important;
+    }
+
+    button:hover {
+      color:#fff;
+      transition: 0.1s;
+  }
+
+  }
+
+
+
+  /**
+   * Modifiers
+   */
+
+  &--pinned {
+    bottom: 0;
+    left: $spacer;
+    position: fixed;
+    right: $spacer;
+
+    .o-chatbot__content {
+      border-bottom: none;
+      height: 75vh;
+
+      @include at($screen-xs) {
+        max-height: $spacer * 20;
+      }
+    }
+
+    @include at($screen-xs) {
+      left: auto;
+      min-width: $spacer * 12;
+    }
+
+    @include to(29.9375rem) {
+      width: auto !important; // This is needed in order to override a custom defined width
+    }
+  }
+}
+
+:host ::ng-deep {
+  .a-avatar {
+    background: none;
+    flex: 0 0 auto;
+
+    + .m-message__content {
+      margin-left: $spacer-xs / 2; // 6px
+    }
+  }
+}
+
+.clearchat {
+  border:0;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 2;
+  background-color: #283236;
+  color: #eee;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+
+  &:hover {
+    // background-color: #865DFF;
+    background-color: #6c8893;
+  }
+  padding: 0;
+  min-width: 0;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  line-height: 40px;
+  border-radius: 50%;
+}
+
+.mat-icon {
+  vertical-align: middle;
+}

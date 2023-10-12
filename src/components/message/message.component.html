@@ -1,0 +1,112 @@
+
+<div
+  class="m-message"
+  [ngClass]="{
+    'm-message--right': data.send,
+    'm-message--center':
+      data.type === 'quickReply' ||
+      data.type === 'error' ||
+      data.type === 'action' ||
+      data.type === 'oldReply'
+  }"
+  *ngIf="!data.hide"
+>
+  <div *ngIf="!data.send && data.avatar" class="a-avatar a-avatar--small mt-2">
+    <img [src]="data.avatar" [alt]="aria.avatar" />
+  </div>
+
+  <div [ngSwitch]="data.type" class="m-message__content">
+    <span *ngIf="data.send" class="u-screen-reader-only">{{ aria.user }}</span>
+
+    <span
+      *ngSwitchCase="'text'"
+      class="m-message__text m-message__ask"
+      tabindex="0"
+      >{{ data.message }}</span
+    >
+
+    <span *ngSwitchCase="'url'" class="m-message__url">
+      <a
+        *ngIf="data.message"
+        [href]="data.url"
+        target="_blank"
+        rel="external"
+        >{{ data.message }}</a
+      >
+      <a
+        *ngIf="!data.message"
+        [href]="data.url"
+        target="_blank"
+        rel="external"
+        >{{ data.url }}</a
+      >
+    </span>
+
+    <span *ngSwitchCase="'image'" class="m-message__image" tabindex="0">
+      <img [src]="data.image" alt="Image." />
+    </span>
+
+    <span *ngSwitchCase="'quickReply'" class="m-message__buttons" matTooltip="Speak">
+      <ng-container *ngFor="let element of data.elements">
+
+        <div class="d-flex flex-column align-items-start ps-1">
+          <small class="ps-2">ChatNEC</small>
+          <button class="a-button a-button--small m-message__reply">
+            <ngx-typed-js [strings]="[element.text]" [loop]="false" [showCursor]="false" (preStringTyped)="speaking(element.text)" [typeSpeed]=10>
+              <span class="typing"></span>
+            </ngx-typed-js>
+          </button>
+        </div>
+
+        <mat-icon (click)="speaking(element.text)" class="material-icons color_white">volume_up</mat-icon>
+        <!-- <aui-icon (click)="speaking(element.text)" name="ai-send-email"></aui-icon> -->
+      </ng-container>
+    </span>
+
+    <span *ngSwitchCase="'oldReply'" class="m-message__buttons" matTooltip="Speak">
+      <ng-container *ngFor="let element of data.elements">
+
+        <div class="d-flex flex-column align-items-start ps-1">
+          <small class="ps-2">ChatNEC</small>
+          <button class="a-button a-button--small m-message__reply">
+            <span class="typing">{{ data.message }}</span>
+          </button>
+        </div>
+
+
+        <mat-icon (click)="speaking(element.text)" class="material-icons color_white">volume_up</mat-icon>
+        <!-- <aui-icon (click)="speaking(element.text)" name="ai-send-email"></aui-icon> -->
+      </ng-container>
+    </span>
+
+    <span *ngSwitchCase="'action'" class="m-message__buttons">
+      <ng-container *ngFor="let element of data.elements">
+        <button
+          [disabled]="data.disable"
+          class="a-button-outline a-button--small"
+        >
+          {{ element.text }}
+        </button>
+      </ng-container>
+    </span>
+
+    <!-- <span *ngSwitchCase="'quickReply'" class="m-message__buttons">
+      <ng-container *ngFor="let element of data.elements">
+        <button (click)="sendReply(element.replyText)" class="a-button a-button--small">{{ element.text }}</button>
+      </ng-container>
+    </span>
+
+    <span *ngSwitchCase="'action'" class="m-message__buttons">
+      <ng-container *ngFor="let element of data.elements">
+        <button [disabled]="data.disable" (click)="performAction(element)" class="a-button-outline a-button--small">{{ element.text }}</button>
+      </ng-container>
+    </span> -->
+
+    <span
+      *ngSwitchCase="'error'"
+      class="m-message__error u-text-danger"
+      tabindex="0"
+      >{{ data.message.slice(0, 11) + 'Please try again later.' }}</span
+    >
+  </div>
+</div>

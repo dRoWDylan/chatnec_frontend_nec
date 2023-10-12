@@ -1,0 +1,49 @@
+
+
+
+    <div class="o-chatbot" [ngClass]="{'o-chatbot--pinned': pinned}" [ngStyle]="{'height':!pinned ? height + 'px' : '', 'width':pinned ? width + 'px' : ''}">
+
+      <div class="o-chatbot__content" *ngIf="!pinned || (pinned && isOpen)">
+        <div class="o-chatbot__header u-text-xlight justify-content-end" [ngClass]="{'o-chatbot__header--no-title': !title}">
+          <div class="col-4 d-flex justify-content-center align-items-center">
+            <!-- <img class="o-chatbot__header__img" src="https://s3.ap-east-1.amazonaws.com/about.drow.cloud.hk/logo.png"> -->
+            <img class="o-chatbot__header__img" src="../../assets/chatnec.svg">
+            <span class="title1">Chat</span>
+            <span class="title2">{{ title }}</span>
+          </div>
+          <div class="col-4 d-flex justify-content-end">
+            <button class="clearchat" (click)="removeChat()" matTooltip="Clear all chat histories" matTooltipPosition="left"><mat-icon>delete</mat-icon></button>
+          </div>
+          <!-- <button class="a-button has-icon" *ngIf="pinned" (click)="toggleChatbot()"><aui-icon name="ai-close" [ariaLabel]="aria.close"></aui-icon></button> -->
+        </div>
+        <div class="o-chatbot__main" #chatbotMain [scrollTop]="chatbotMain.scrollHeight" tabindex="0">
+          <aui-chatbot-message [data]="defaultMessage" [aria]="aria"></aui-chatbot-message>
+          <div *ngIf="data && data.length > 0" class="u-margin-xs" aria-live="polite" aria-atomic="false" role="log" [attr.aria-label]="aria.chatbot">
+            <ng-container *ngFor="let message of data">
+              <aui-chatbot-message [data]="message" [aria]="aria"></aui-chatbot-message>
+            </ng-container>
+            <!-- <ng-container *ngFor="let message of data">
+              <aui-chatbot-message [data]="message" [aria]="aria" (replyClicked)="sendReply($event)" (actionStarted)="performAction($event)"></aui-chatbot-message>
+            </ng-container> -->
+            <div *ngIf="isLoading" class="o-chatbot__loader">
+              <div class="a-avatar a-avatar--small" *ngIf="!loadingIndex">
+                <img [src]="avatar" [alt]="aria.avatar">
+              </div>
+              <span role="alert" aria-busy="true"><mat-spinner [diameter]="25"></mat-spinner></span>
+            </div>
+          </div>
+        </div>
+        <div class="o-chatbot__footer">
+          <div class="o-chatbot__input a-input">
+            <input #messageInput type="text" name="chat-input" autocomplete="off" [placeholder]="placeholder" [(ngModel)]="message.message" [disabled]="currentAction !== ''" (keyup.enter)="sendMessage()" [attr.aria-label]="aria.message" />
+            <button type="submit" class="a-button has-icon" [disabled]="currentAction !== ''" (click)="sendMessage()" [attr.aria-label]="aria.send">
+              <aui-icon name="ai-send-email"></aui-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="o-chatbot__buttons" *ngIf="pinned && !isOpen">
+        <button (click)="toggleChatbot()" class="a-button has-icon-left"><aui-icon name="ai-conversation-text"></aui-icon>{{ aria.toggle }}</button>
+      </div>
+    
+    </div>
